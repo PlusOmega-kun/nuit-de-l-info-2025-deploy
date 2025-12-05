@@ -12,20 +12,19 @@ Ce projet est une plateforme web permettant de rechercher, visualiser et analyse
 - **Connexion à une base MongoDB** : Les données sont stockées et requêtées via MongoDB.
 
 ## Structure du projet
-- `index.html`, `style.css`, `app.js` : Interface web (frontend).
-- `cve_browser/server.js` : Serveur Node.js (Express) qui expose l'API REST pour interroger les CVE, les statistiques, et gérer les imports.
-- `cve_browser/import.js` : Script d'import massif de données CVE dans MongoDB à partir de fichiers JSON.
+- `public/` : Interface web (frontend) - contient `index.html`, `style.css` et `app.js`.
+- `app.js` : Serveur Node.js (Express) qui expose l'API REST pour interroger les CVE, les statistiques, gérer les imports, et sert les fichiers statiques.
+- `import.js` : Script d'import massif de données CVE dans MongoDB à partir de fichiers JSON.
 - `mitre-cve-database/` : Scripts et données brutes (hors `cve-data/mitre`).
 - `test/` : Fichiers de test et d'exemple.
 
 ## Prérequis
 - **Node.js** (v18+ recommandé)
-- **MongoDB** (local ou distant)
+- **MongoDB** (local ou distant) - optionnel, le serveur peut démarrer sans MongoDB
 
 ## Installation
-1. Clonez le dépôt et placez-vous dans le dossier `cve_browser` :
-	```powershell
-	cd "cve_browser"
+1. Clonez le dépôt et installez les dépendances :
+	```bash
 	npm install
 	```
 2. Configurez l'accès à MongoDB dans les scripts si besoin (URI par défaut : `mongodb://localhost:27017`).
@@ -34,25 +33,25 @@ Ce projet est une plateforme web permettant de rechercher, visualiser et analyse
 Pour installer les dépendances nécessaires et récupérer les données CVE, exécutez le script suivant :
 
 ```bash
-./fetch-cve-data.sh
+./mitre-cve-database/fetch-cve-data.sh
 ```
 
 ## Lancement du serveur
-Dans le dossier `cve_browser` :
-```powershell
-node server.js
+À la racine du projet :
+```bash
+node app.js
 ```
-Le serveur API sera accessible sur [http://localhost:3000](http://localhost:3000).
+Le serveur sera accessible sur [http://localhost:3000](http://localhost:3000).
 
 ## Utilisation de l'interface web
-Ouvrez simplement le fichier `index.html` dans votre navigateur. L'interface communique avec le serveur Node.js pour afficher les résultats.
+Accédez à [http://localhost:3000](http://localhost:3000) dans votre navigateur. L'interface communique avec le serveur Node.js pour afficher les résultats.
 
 ## Import de données CVE (optionnel)
-Pour importer des données brutes dans MongoDB :
-```powershell
+Pour importer des données brutes dans MongoDB, à la racine du projet :
+```bash
 node import.js
 ```
-Vérifiez que le chemin vers les fichiers JSON est correct dans `import.js` (variable `DATA_DIR`).
+Le script utilise maintenant un chemin relatif vers `mitre-cve-database/cve-data/mitre/cves`.
 
 ## À quoi sert ce projet ?
 Ce projet vise à faciliter la veille de sécurité, l'analyse de vulnérabilités et la gestion de risques pour les professionnels de la cybersécurité, les RSSI, ou toute personne souhaitant explorer la base CVE de façon moderne et interactive.
