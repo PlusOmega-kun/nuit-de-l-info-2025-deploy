@@ -1,0 +1,2 @@
+hey, if you are reading this just wanted to tell you that to keep this up to date you should call git pull into the directory with the cve files :3
+have a good day

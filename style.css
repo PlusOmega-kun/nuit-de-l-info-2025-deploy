@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root {
+    --rimini-yellow: #FBE700;
+    --rimini-yellow-hover: #e5d200;
+    --rimini-dark: #0f172a; /* Slate 900 */
+    --rimini-panel: #1e293b; /* Slate 800 */
+    --rimini-border: #334155; /* Slate 700 */
+    --rimini-text: #f1f5f9;
+    --rimini-text-muted: #94a3b8;
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--rimini-dark);
+    color: var(--rimini-text);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+
+/* --- RIMINI COMPONENTS --- */
+
+/* Cards with Glassmorphism feel */
+.rimini-card {
+    background-color: var(--rimini-panel);
+    border: 1px solid var(--rimini-border);
+    transition: all 0.3s ease;
+}
+.rimini-card:hover {
+    border-color: var(--rimini-yellow);
+    box-shadow: 0 0 15px rgba(251, 231, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Primary Button (Yellow) */
+.btn-rimini {
+    background-color: var(--rimini-yellow);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+}
+.btn-rimini:hover {
+    background-color: var(--rimini-yellow-hover);
+    box-shadow: 0 0 10px rgba(251, 231, 0, 0.4);
+}
+
+/* Inputs */
+.input-rimini {
+    background-color: #020617;
+    border: 1px solid var(--rimini-border);
+    color: white;
+}
+.input-rimini:focus {
+    border-color: var(--rimini-yellow);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(251, 231, 0, 0.2);
+}
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--rimini-dark); }
+::-webkit-scrollbar-thumb { background: var(--rimini-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* --- UTILS --- */
+.text-rimini-yellow { color: var(--rimini-yellow); }
+.border-rimini-yellow { border-color: var(--rimini-yellow); }
