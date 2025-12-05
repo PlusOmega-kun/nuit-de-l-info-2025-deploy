@@ -142,3 +142,4 @@ vite.config.ts.timestamp-*
 # CUSTOM
 
 mitre-cve-database/cve-data/
+BACKUP/
