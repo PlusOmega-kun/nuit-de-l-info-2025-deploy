@@ -1,6 +1,6 @@
-const API_URL = 'http://localhost:3000/api/cves'; 
-const STATS_URL = 'http://localhost:3000/api/stats';
-const UPLOAD_URL = 'http://localhost:3000/api/upload';
+const API_URL = '/api/cves'; 
+const STATS_URL = '/api/stats';
+const UPLOAD_URL = '/api/upload';
 const LIMIT = 20; 
 
 // --- CHART DEFAULTS ---
