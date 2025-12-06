@@ -38,30 +38,10 @@ async function connectToMongo() {
         cveCollection = db.collection(COLLECTION_NAME);
         console.log(`[MongoDB] Connected successfully to database: ${DB_NAME}`);
 
-        // --- DEBUT DE LA CORRECTION ---
-        console.log("[MongoDB] Updating indexes...");
-        
-        // On supprime les anciens index qui pourraient bloquer (optionnel mais recommandé)
-        await cveCollection.dropIndexes().catch(() => {});
-
-        // On crée le BON index textuel sur les champs 'cveMetadata.cveId' ET 'containers.cna.descriptions.value'
-        await cveCollection.createIndex(
-            { 
-                "cveMetadata.cveId": "text", 
-                "containers.cna.descriptions.value": "text" 
-            }, 
-            { 
-                name: "TextSearchIndex",
-                weights: { "cveMetadata.cveId": 10, "containers.cna.descriptions.value": 1 } // L'ID est plus important
-            }
-        );
-        console.log("[MongoDB] Text index created successfully.");
-        // --- FIN DE LA CORRECTION ---
-
-        // Les autres index normaux
-        await cveCollection.createIndex({ 'cveMetadata.cveId': 1 });
-        await cveCollection.createIndex({ 'cveMetadata.datePublished': -1 });
-
+        // Ensure indexes
+        await cveCollection.createIndex({ search_text: "text" }).catch(() => {});
+        await cveCollection.createIndex({ 'cveMetadata.cveId': 1 }).catch(() => {});
+        await cveCollection.createIndex({ 'cveMetadata.datePublished': -1 }).catch(() => {});
     } catch (error) {
         console.warn("[MongoDB] Connection failed:", error.message);
         console.warn("[MongoDB] Server will continue without database access. API endpoints will return unavailable errors.");
